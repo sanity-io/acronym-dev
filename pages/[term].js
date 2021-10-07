@@ -1,13 +1,41 @@
+import Head from "next/head";
+import Link from "next/link";
 import { groq } from "next-sanity";
-import { client } from "../utils/sanity";
-function Acronym(props) {
-  const { term } = props;
+import { client, BlockContent } from "../utils/sanity";
+import React from "react";
+function Acronym({ doc = {} }) {
+  const { term = "", description = [], explainer = [] } = doc;
   return (
     <>
-      <article className="flex flex-col items-center justify-center min-h-screen py-2">
-        <h1>{term}</h1>
-        <p>Description</p>
-        <p>Suggest an acronym</p>
+      <Head>
+        <title> {term} - Acronym.dev </title>
+      </Head>
+      <p>
+        <Link href="/">
+          <a>&larr; Home</a>
+        </Link>{" "}
+      </p>
+      <article className="flex flex-col items-left min-h-screen p-4">
+        <h1 className="font-bold">{term}</h1>
+        <div>
+          <dl>
+            {explainer.length > 0 &&
+              explainer.map((token) => {
+                return (
+                  <>
+                    <dt key={token?._key + token?.letter}>
+                      <Link href={`/letter/${token?.letter}`}>
+                        <a>{token?.letter}</a>
+                      </Link>
+                    </dt>
+                    <dd key={token?._key + token?.term}>{token?.term}</dd>
+                  </>
+                );
+              })}
+          </dl>
+        </div>
+        {description?.length > 0 && <BlockContent blocks={description} />}
+        <p className="py-10">Suggest an acronym</p>
       </article>
       <aside>Other relevant terms</aside>
     </>
@@ -17,7 +45,10 @@ function Acronym(props) {
 const query = groq`*[_type == "term" && slug.current == $term][0]{
   _id,
   term,
-  description
+  description,
+  explainer,
+  slug,
+  _updatedAt
 }`;
 
 export const getStaticPaths = () => {
@@ -29,11 +60,12 @@ export const getStaticPaths = () => {
 
 export const getStaticProps = async (props) => {
   const { term } = props.params;
-  const termDescription = await client.fetch(query, { term });
+  const doc = await client.fetch(query, {
+    term: term.toLowerCase(),
+  });
   return {
     props: {
-      term,
-      termDescription,
+      doc,
     },
   };
 };
