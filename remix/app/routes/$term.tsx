@@ -2,7 +2,7 @@ import { Link, MetaFunction, useLoaderData } from "remix";
 import groq from "groq";
 import { client } from "~/lib/sanity/client";
 import Definition from "../components/definition";
-import { likeButtonAction } from "~/lib/likeButtonAction";
+import TermHeader from "~/components/termHeader";
 
 export async function action({ request }) {
   const data = await request.formData();
@@ -55,9 +55,7 @@ export default function Acronym({ children }: { children: React.ReactNode }) {
   return (
     <>
       <section className="p-6 border-1 bg-white border-gray-300 drop-shadow-md max-w-3xl mx-auto prose my-2">
-        <h1 className="font-bold text-xxl bg-pink-600 text-white inline-block p-1 px-3 italic">
-          {term}
-        </h1>
+        <TermHeader term={term} />
         {definitions &&
           definitions
             .sort((a, b) => a.slug?.current.localeCompare(b.slug?.current))

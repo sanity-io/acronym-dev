@@ -1,6 +1,7 @@
 import groq from "groq";
 import { useLoaderData, Link } from "remix";
 import Definition from "~/components/definition";
+import TermHeader from "~/components/termHeader";
 import { client } from "~/lib/sanity/client";
 import { likeButtonAction } from "~/lib/likeButtonAction";
 
@@ -46,9 +47,7 @@ export default function TermDefinition() {
       <>
         <Link to={`/${term}/${slug}`}>Back</Link>
         <section className="p-6 border-1 bg-white border-gray-300 drop-shadow-md max-w-3xl mx-auto prose my-2">
-          <h1 className="font-bold text-xxl bg-slate-500 text-white inline-block p-1 px-3 italic">
-            {term.toUpperCase()}
-          </h1>
+          <TermHeader term={termName} />
           {definitions &&
             definitions.map((definition: any, index: number, arr: any[]) => (
               <Definition

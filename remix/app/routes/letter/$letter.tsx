@@ -10,21 +10,30 @@ const query = groq`{
 }`;
 
 const wordsQuery = groq`
-  "words":
+  *[definitions[].explainer[].term match $letter+"*"].definitions[].explainer[term match $letter+"*"]{
+  term,
+  "count": count(*[^.term in definitions[].explainer[].term])
+}
 `;
 
 export const loader: LoaderFunction = async ({ params }) => {
   const { letter } = params;
-  const { acronyms, related } = await client.fetch(query, { letter });
+  console.log("letter: ", letter);
+  // const { acronyms, related } = await client.fetch(query, { letter });
+  const words = await client.fetch(wordsQuery, { letter });
   return {
     letter,
-    acronyms,
-    related,
+    words,
   };
 };
 
+const arrayUniqueByKey = (array, key) => [
+  ...new Map(array.map((item) => [item[key], item])).values(),
+];
+
 function Letter() {
-  const { letter, acronyms, related } = useLoaderData();
+  const { letter, words } = useLoaderData();
+  const dedupedWords = arrayUniqueByKey(words, "term");
 
   return (
     <React.Fragment>
@@ -33,12 +42,23 @@ function Letter() {
           <Link to="/">🔙 Back</Link>
         </div>
         <div className="prose">
+          {dedupedWords
+            .sort((a, b) => a.term.localeCompare(b.term))
+            .sort((a, b) => b.count - a.count)
+            .map((word) => (
+              <div key={word.term} className="mb-4">
+                {word.term} : {word.count}
+              </div>
+            ))}
+        </div>
+      </article>
+      {/* <div className="prose">
           <h1 className="font-bold">{letter}</h1>
           {acronyms.length > 0 && <ul>{acronyms.map(Acronym)}</ul>}
         </div>
       </article>
       <aside>Other relevant terms</aside>
-      <pre>{JSON.stringify(related, null, 2)}</pre>
+      <pre>{JSON.stringify(related, null, 2)}</pre> */}
     </React.Fragment>
   );
 }
