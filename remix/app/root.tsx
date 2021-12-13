@@ -13,6 +13,7 @@ import type { LinksFunction } from "remix";
 
 import styles from "./tailwind.css";
 import Suggestion from "./components/suggestion";
+import Footer from "./components/footer";
 
 // https://remix.run/api/app#links
 export let links: LinksFunction = () => {
@@ -41,10 +42,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
           <h1>There was an error</h1>
           <p>{error.message}</p>
           <hr />
-          <p>
-            Hey, developer, you should replace this with what you want your
-            users to see.
-          </p>
+          <p>It's us. Not you.</p>
         </div>
       </Layout>
     </Document>
@@ -157,14 +155,7 @@ function Layout({ children }: { children: React.ReactNode }) {
       <div>
         <div>{children}</div>
       </div>
-      <footer>
-        <div>
-          <section className="p-4">
-            <Suggestion />
-          </section>
-          <p>&copy; You!</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

@@ -17,6 +17,8 @@
     "@remix-run/react": "^1.0.6",
     "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/client": "^2.23.0",
+    "@sanity/icons": "^1.2.2",
+    "@sanity/logos": "^1.1.7",
     "dotenv": "^10.0.0",
     "groq": "^2.15.0",
     "picosanity": "^3.0.2",
