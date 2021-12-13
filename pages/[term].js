@@ -2,9 +2,10 @@ import Head from "next/head";
 import Link from "next/link";
 import { groq } from "next-sanity";
 import { client, BlockContent } from "../utils/sanity";
-import React from "react";
+import Definition from "../components/Definition";
+
 function Acronym({ doc = {} }) {
-  const { term = "", description = [], explainer = [] } = doc;
+  const { term = "", definitions } = doc;
   return (
     <>
       <Head>
@@ -13,43 +14,34 @@ function Acronym({ doc = {} }) {
       <p>
         <Link href="/">
           <a>&larr; Home</a>
-        </Link>{" "}
+        </Link>
       </p>
-      <article className="flex flex-col items-left min-h-screen p-4">
-        <h1 className="font-bold">{term}</h1>
-        <div>
-          <dl>
-            {explainer.length > 0 &&
-              explainer.map((token) => {
-                return (
-                  <>
-                    <dt key={token?._key + token?.letter}>
-                      <Link href={`/letter/${token?.letter}`}>
-                        <a>{token?.letter}</a>
-                      </Link>
-                    </dt>
-                    <dd key={token?._key + token?.term}>{token?.term}</dd>
-                  </>
-                );
-              })}
-          </dl>
-        </div>
-        {description?.length > 0 && <BlockContent blocks={description} />}
+      <section className="p-6 border-1 bg-white border-gray-300 drop-shadow-md max-w-3xl mx-auto prose my-2">
+        <h1 className="font-bold text-xxl">{term}</h1>
+        {definitions && definitions.map((definition, index, arr) => (
+          <Definition
+            definition={definition}
+            hr={index < arr.length - 1}
+            key={definition?._key}
+          />
+        ))}
+      </section>
+      <section className="p-4">
         <p className="py-10">Suggest an acronym</p>
-      </article>
-      <aside>Other relevant terms</aside>
+        <aside>Other relevant terms</aside>
+      </section>
     </>
   );
 }
 
 const query = groq`*[_type == "term" && slug.current == $term][0]{
-  _id,
-  term,
-  description,
-  explainer,
-  slug,
-  _updatedAt
-}`;
+        _id,
+        term,
+        description,
+        definitions,
+        slug,
+        _updatedAt
+      }`;
 
 export const getStaticPaths = () => {
   return {
