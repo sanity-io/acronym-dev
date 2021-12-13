@@ -56,7 +56,7 @@ export default function Acronym({ children }: { children: React.ReactNode }) {
   const { term = "", definitions, _rev, _id } = doc;
   return (
     <>
-      <section className="max-w-3xl p-6 mx-auto my-2 mb-8 prose bg-white border-gray-300 border-1">
+      <section className="p-6 border-1 bg-white border-gray-300 drop-shadow-md max-w-3xl mx-auto prose my-2 rounded">
         <TermHeader term={term} />
         {definitions &&
           definitions
