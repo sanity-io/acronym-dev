@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes alternateColor {
+  0%,
+  100% {
+    @apply text-pink-600;
+  }
+  50% {
+    @apply text-indigo-600;
+  }
+}
+
+.alternateColor:nth-of-type(even) {
+  animation: 2s infinite alternateColor;
+}
+.alternateColor:nth-of-type(odd) {
+  animation: 2s 1s infinite alternateColor;
+}
