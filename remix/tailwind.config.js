@@ -2,16 +2,16 @@ module.exports = {
   mode: "jit",
   content: ["./app/**/*.{ts,tsx}"],
   darkMode: "media", // or 'media' or 'class'
-  theme: {
+  theme: ({ theme }) => ({
     extend: {
       keyframes: {
         wiggle: {
           "0%, 100%": { transform: "rotate(-13deg)" },
           "50%": { transform: "rotate(13deg)" }
-        }
+        },
       },
       animation: {
-        wiggle: "wiggle 200ms ease-in-out"
+        wiggle: "wiggle 200ms ease-in-out",
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
@@ -27,7 +27,7 @@ module.exports = {
         },
       } */
     }
-  },
+  }),
   variants: {},
   plugins: [
     require('@tailwindcss/typography'),
