@@ -2,6 +2,7 @@ import { Form, useActionData } from "remix";
 
 export default function Suggestion() {
   const errors = useActionData();
+  return <pre>Suggestion box comes here</pre>;
   return (
     <div>
       <h2>Suggest an acronym, abbreviation or initialism</h2>
