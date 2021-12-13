@@ -1,4 +1,4 @@
-import Acronym from "./Acronym";
+import Acronym from "./acronym";
 
 type IndexEntryProps = {
   letter: string;

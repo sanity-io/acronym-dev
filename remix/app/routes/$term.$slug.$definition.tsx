@@ -1,6 +1,6 @@
 import groq from "groq";
 import { useLoaderData, Link } from "remix";
-import Definition from "~/components/Definition";
+import Definition from "~/components/definition";
 import { client } from "~/lib/sanity/client";
 import { likeButtonAction } from "~/lib/likeButtonAction";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "remix";
-import { PortableText } from "~/lib/sanity/PortableText";
+import { PortableText } from "~/lib/sanity/portableText";
 import LikeButton from "./likeButton";
 
 type DefinitionProps = {

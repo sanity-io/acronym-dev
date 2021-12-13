@@ -2,7 +2,7 @@ import type { MetaFunction, LoaderFunction } from "remix";
 import { useLoaderData, json, Link } from "remix";
 import groq from "groq";
 import { client } from "~/lib/sanity/client";
-import IndexEntry from "~/components/IndexEntry";
+import IndexEntry from "~/components/indexEntry";
 const query = groq`*[_type == "term" && exclude != true]|order(term)`;
 
 type IndexData = {

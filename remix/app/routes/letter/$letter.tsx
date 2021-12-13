@@ -9,7 +9,9 @@ const query = groq`{
   "related": *[$letter in definitions[].explainer[].letter && !($letter in definitions[].explainer[0].letter)]
 }`;
 
-const wordsQuery = groq``;
+const wordsQuery = groq`
+  "words":
+`;
 
 export const loader: LoaderFunction = async ({ params }) => {
   const { letter } = params;

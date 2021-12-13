@@ -1,7 +1,7 @@
 import { Link, MetaFunction, useLoaderData } from "remix";
 import groq from "groq";
 import { client } from "~/lib/sanity/client";
-import Definition from "../components/Definition";
+import Definition from "../components/definition";
 import { likeButtonAction } from "~/lib/likeButtonAction";
 
 export async function action({ request }) {
