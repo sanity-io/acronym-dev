@@ -15,14 +15,19 @@ export default {
           // initialValues: {
           // Set initial value of letter from index in term string
           // },
+          fieldsets: [
+            { name: 'twoCols', options: { columns: 2 } }
+          ],
           fields: [
-            {
-              name: "letter",
-              type: "string",
-            },
             {
               name: "term",
               type: "string",
+              fieldset: 'twoCols',
+            },
+            {
+              name: "letter",
+              type: "string",
+              fieldset: 'twoCols',
             },
             {
               name: 'termRef',
@@ -51,8 +56,8 @@ export default {
                       background: "#ced2d9",
                     }}
                   >
-                    <Text size={4} weight="semibold" style={{ color: "white" }}>
-                      {letter}
+                    <Text size={4} weight="semibold" style={{ color: letter ? "white" : "#333" }}>
+                      {letter || '✘'}
                     </Text>
                   </div>
                 ),
@@ -61,6 +66,21 @@ export default {
           },
         },
       ],
+    },
+    {
+      name: "slug",
+      type: "slug",
+      title: "Slug",
+      options: {
+        source: (doc, options) => options.parent.explainer,
+        maxLength: 96,
+        slugify: input => {
+          const inputString = input.map(({ term }) => term).join("-");
+          return inputString
+            .toLowerCase()
+            .replace(/[^\w-]+/g, "");
+        }
+      },
     },
     {
       name: "description",
@@ -79,6 +99,11 @@ export default {
       name: "suggestedBy",
       type: "reference",
       to: [{ type: "person" }],
+    },
+    {
+      name: 'likes',
+      type: 'number',
+      readOnly: true,
     },
     {
       name: 'enabled',

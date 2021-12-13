@@ -1,4 +1,5 @@
 import {
+  NavLink,
   Link,
   Links,
   LiveReload,
@@ -11,6 +12,7 @@ import {
 import type { LinksFunction } from "remix";
 
 import styles from "./tailwind.css";
+import Suggestion from "./components/suggestion";
 
 // https://remix.run/api/app#links
 export let links: LinksFunction = () => {
@@ -115,22 +117,40 @@ function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="mx-8 my-8">
       <header>
-        <div>
-          <Link to="/" title="Remix" className="prose">
+        <div className="container flex flex-wrap py-2 flex-col md:flex-row items-center mb-4">
+          <Link
+            to="/"
+            title="Remix"
+            className="title-font font-medium text-gray-900"
+          >
             <h1>Acronym.dev</h1>
           </Link>
-          <nav aria-label="Main navigation">
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <a href="https://www.sanity.io">Sanity.io</a>
-              </li>
-              <li>
-                <a href="https://github.com/sanity-io/acronym-dev">GitHub</a>
-              </li>
-            </ul>
+          <nav
+            aria-label="Main navigation"
+            className="md:mr-auto md:ml-4 py-4 md:py-1 md:pl-4 md:border-l md:border-gray-400 flex flex-wrap items-center text-base justify-center space-x-5"
+          >
+            <NavLink
+              to="/"
+              className="border-b-2 border-transparent hover:border-gray-500 hover:text-gray-900"
+            >
+              Home
+            </NavLink>
+            <a
+              href="https://www.sanity.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-b-2 border-transparent hover:border-gray-500 hover:text-gray-900"
+            >
+              Sanity.io
+            </a>
+            <a
+              href="https://github.com/sanity-io/acronym-dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-b-2 border-transparent hover:border-gray-500 hover:text-gray-900"
+            >
+              GitHub
+            </a>
           </nav>
         </div>
       </header>
@@ -139,6 +159,9 @@ function Layout({ children }: { children: React.ReactNode }) {
       </div>
       <footer>
         <div>
+          <section className="p-4">
+            <Suggestion />
+          </section>
           <p>&copy; You!</p>
         </div>
       </footer>

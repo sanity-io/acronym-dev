@@ -3,7 +3,7 @@ import { useLoaderData, json, Link } from "remix";
 import groq from "groq";
 import { client } from "~/lib/sanity/client";
 import IndexEntry from "~/components/IndexEntry";
-const query = groq`*[_type == "term"]|order(term)`;
+const query = groq`*[_type == "term" && exclude != true]|order(term)`;
 
 type IndexData = {
   acronyms: Array<{ name: string; url: string }>;

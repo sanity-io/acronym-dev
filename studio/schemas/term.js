@@ -18,7 +18,13 @@ export default {
       name: "definitions",
       type: "array",
       of: [{ type: "definition" }],
-    }
+    }, {
+      name: 'exclude',
+      title: 'Exclude from index',
+      type: 'boolean',
+      initialValue: false,
+    },
+
   ],
   preview: {
     select: {

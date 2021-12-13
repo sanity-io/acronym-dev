@@ -1,13 +1,15 @@
 import { Link, LoaderFunction, useLoaderData } from "remix";
 import groq from "groq";
 import { client } from "~/lib/sanity/client";
-import Acronym from "~/components/Acronym";
+import Acronym from "~/components/acronym";
 import React from "react";
 
 const query = groq`{
   "acronyms": *[$letter in definitions[].explainer[0].letter]|order(term asc),
   "related": *[$letter in definitions[].explainer[].letter && !($letter in definitions[].explainer[0].letter)]
 }`;
+
+const wordsQuery = groq``;
 
 export const loader: LoaderFunction = async ({ params }) => {
   const { letter } = params;
