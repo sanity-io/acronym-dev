@@ -113,43 +113,49 @@ function Document({
 function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex flex-col h-screen p-8">
-      <header>
-        <div className="container flex flex-col flex-wrap items-center py-2 mb-4 md:flex-row">
-          <Link
+      <header className="mb-12">
+        <nav
+          aria-label="Main navigation"
+          className="flex flex-wrap items-center justify-center py-4 space-x-5 text-base md:mr-auto md:ml-4 md:py-1 md:pl-4"
+        >
+          <NavLink
             to="/"
-            title="Home"
-            className="font-medium text-gray-900 title-font"
+            className="border-b-2 border-transparent hover:border-gray-500 hover:text-gray-900"
           >
-            <h1>Acronym.dev</h1>
-          </Link>
-          <nav
-            aria-label="Main navigation"
-            className="flex flex-wrap items-center justify-center py-4 space-x-5 text-base md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400"
+            Home
+          </NavLink>
+          <a
+            href="https://www.sanity.io"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="border-b-2 border-transparent hover:border-gray-500 hover:text-gray-900"
           >
-            <NavLink
-              to="/"
-              className="border-b-2 border-transparent hover:border-gray-500 hover:text-gray-900"
-            >
-              Home
-            </NavLink>
-            <a
-              href="https://www.sanity.io"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border-b-2 border-transparent hover:border-gray-500 hover:text-gray-900"
-            >
-              Sanity.io
-            </a>
-            <a
-              href="https://github.com/sanity-io/acronym-dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border-b-2 border-transparent hover:border-gray-500 hover:text-gray-900"
-            >
-              GitHub
-            </a>
-          </nav>
-        </div>
+            Sanity.io
+          </a>
+          <a
+            href="https://github.com/sanity-io/acronym-dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="border-b-2 border-transparent hover:border-gray-500 hover:text-gray-900"
+          >
+            GitHub
+          </a>
+        </nav>
+        <Link to="/" title="Home" className="w-full text-center">
+          <h1 className="font-black text-9xl ">
+            <span className="text-pink-600 alternateColor">a</span>
+            <span className="text-indigo-600 alternateColor">c</span>
+            <span className="text-pink-600 alternateColor">r</span>
+            <span className="text-indigo-600 alternateColor">o</span>
+            <span className="text-pink-600 alternateColor">n</span>
+            <span className="text-indigo-600 alternateColor">y</span>
+            <span className="text-pink-600 alternateColor">m</span>
+            <span className="text-indigo-600 alternateColor">.</span>
+            <span className="text-pink-600 alternateColor">d</span>
+            <span className="text-indigo-600 alternateColor">e</span>
+            <span className="text-pink-600 alternateColor">v</span>
+          </h1>
+        </Link>
       </header>
       <main className="flex-grow">
         <div>{children}</div>
