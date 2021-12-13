@@ -12,8 +12,8 @@ type IndexData = {
 // https://remix.run/api/conventions#meta
 export let meta: MetaFunction = () => {
   return {
-    title: "Remix Starter",
-    description: "Welcome to remix!",
+    title: "Acronym.dev",
+    description: "A curated list of acronyms, initialisms and abbreviations from the tech world",
   };
 };
 
@@ -44,7 +44,7 @@ export default function Letter() {
   const indexEntries = Object.entries(index);
   return (
     <>
-      <main className="flex flex-col items-left min-h-screen p-4 prose">
+      <main className="flex flex-col min-h-screen p-4 prose items-left">
         {indexEntries.map(IndexEntry)}
       </main>
       <aside>Other relevant terms</aside>

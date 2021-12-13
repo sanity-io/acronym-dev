@@ -45,7 +45,7 @@ const Definition = ({
                         <React.Fragment key={token?._key + token?.letter}>
                           <Link
                             to={`/letter/${token?.letter.slice(0, 1)}`}
-                            className="font-bold text-pink-600/100 no-underline hover:underline"
+                            className="font-bold no-underline text-pink-600/100 hover:underline"
                           >
                             {token?.letter}
                           </Link>

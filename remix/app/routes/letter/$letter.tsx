@@ -37,17 +37,18 @@ function Letter() {
 
   return (
     <React.Fragment>
-      <article className="flex flex-col items-left min-h-screen p-4">
-        <div className="text-decoration-none mb-4">
+      <article className="flex flex-col min-h-screen p-4 items-left">
+        <div className="mb-4 text-decoration-none">
           <Link to="/">🔙 Back</Link>
         </div>
         <div className="prose">
+        //TODO: List definitions for each term
           {dedupedWords
             .sort((a, b) => a.term.localeCompare(b.term))
             .sort((a, b) => b.count - a.count)
             .map((word) => (
               <div key={word.term} className="mb-4">
-                {word.term} : {word.count}
+                {word.term}: {word.count}
               </div>
             ))}
         </div>
