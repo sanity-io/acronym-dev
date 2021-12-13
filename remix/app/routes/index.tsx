@@ -1,5 +1,5 @@
 import type { MetaFunction, LoaderFunction } from "remix";
-import { useLoaderData, json, Link } from "remix";
+import { useLoaderData, Link } from "remix";
 import groq from "groq";
 import { client } from "~/lib/sanity/client";
 import IndexEntry from "~/components/indexEntry";
@@ -13,7 +13,8 @@ type IndexData = {
 export let meta: MetaFunction = () => {
   return {
     title: "Acronym.dev",
-    description: "A curated list of acronyms, initialisms and abbreviations from the tech world",
+    description:
+      "A curated list of acronyms, initialisms and abbreviations from the tech world",
   };
 };
 
@@ -43,8 +44,18 @@ export default function Letter() {
   const index = acronymIndex(acronyms);
   const indexEntries = Object.entries(index);
   return (
-      <main className="flex flex-col min-h-screen p-4 prose items-left">
-        {indexEntries.map(IndexEntry)}
-      </main>
+    <main className="flex flex-col min-h-screen p-4  items-left">
+      <nav className="flex justify-evenly mx-auto w-full sticky top-0 bg-white">
+        {indexEntries.map(([letter]) => (
+          <Link
+            to={`#${letter}`}
+            className="font-medium text-xl uppercase hover:text-pink-600"
+          >
+            {letter}
+          </Link>
+        ))}
+      </nav>
+      <div className="prose">{indexEntries.map(IndexEntry)}</div>
+    </main>
   );
 }
