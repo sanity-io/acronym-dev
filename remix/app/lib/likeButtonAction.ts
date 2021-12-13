@@ -20,7 +20,6 @@ export async function likeButtonAction(data: any) {
       .setIfMissing({ [`definitions[_key == \"${_key}\"].likes`]: 0 })
       .inc({ [`definitions[_key == \"${_key}\"].likes`]: 1 })
       .commit();
-    console.log(patch);
   } catch (e) {
     console.error(e);
   }
