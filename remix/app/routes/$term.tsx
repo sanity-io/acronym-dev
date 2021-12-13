@@ -3,8 +3,9 @@ import groq from "groq";
 import { client } from "~/lib/sanity/client";
 import Definition from "../components/definition";
 import TermHeader from "~/components/termHeader";
+import { likeButtonAction } from "~/lib/likeButtonAction";
 
-export async function action({ request }) {
+export async function action({ request: any }) {
   const data = await request.formData();
   return likeButtonAction(data);
 }
@@ -15,6 +16,7 @@ type DefinitionProps = {
   index: number;
   arr: any[];
   slug: { current: string };
+  likes: number;
 };
 
 interface AcronymDoc {
@@ -58,12 +60,12 @@ export default function Acronym({ children }: { children: React.ReactNode }) {
         <TermHeader term={term} />
         {definitions &&
           definitions
-          .sort((a, b) => a.slug?.current.localeCompare(b.slug?.current))
+            .sort((a, b) => a.slug?.current.localeCompare(b.slug?.current))
             .sort((a, b) => b.likes - a.likes)
             .map((definition, index, arr) => (
               <Definition
                 revisionId={_rev}
-                key={definition?._key}
+                _key={definition?._key}
                 id={_id}
                 definition={definition}
                 hr={index < arr.length - 1}

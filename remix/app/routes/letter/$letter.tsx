@@ -42,7 +42,7 @@ function Letter() {
           <Link to="/">🔙 Back</Link>
         </div>
         <div className="prose">
-        //TODO: List definitions for each term
+          //TODO: List definitions for each term
           {dedupedWords
             .sort((a, b) => a.term.localeCompare(b.term))
             .sort((a, b) => b.count - a.count)
