@@ -63,7 +63,28 @@ const Definition = ({
             {definition.description?.length > 0 && (
               <div className="text-sm">
                 <PortableText blocks={definition.description} />
-                <Link
+              </div>
+            )}
+            {definition.resources?.length > 0 && (
+              <>
+                <hr className="my-6"/>
+                <h4 className="mb-0 text-base font-normal">Resources</h4>
+                <ul className="p-4 pt-0 mt-2 text-base list-disc">
+                  {definition.resources.map((resource: any) => (
+                    <li key={resource._key}>
+                      <Link
+                        to={resource.url}
+                        className="text-blue-700 hover:underline"
+                      >
+                        {resource.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+            <div className="text-sm">
+            <Link
                   to={`/${term.toLowerCase()}/${definition?.slug?.current}/${
                     definition._key
                   }`}
@@ -79,24 +100,6 @@ const Definition = ({
                   likes={definition.likes}
                 />
               </div>
-            )}
-            {definition.resources?.length > 0 && (
-              <>
-                <h4 className="mb-0 font-normal text-slate-600">Resources</h4>
-                <ul className="p-4 pt-0 mt-2 list-disc">
-                  {definition.resources.map((resource: any) => (
-                    <li key={resource._key}>
-                      <Link
-                        to={resource.url}
-                        className="text-blue-600 hover:underline"
-                      >
-                        {resource.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </>
-            )}
           </dd>
         </dl>
       </article>

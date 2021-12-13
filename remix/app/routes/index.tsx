@@ -43,11 +43,8 @@ export default function Letter() {
   const index = acronymIndex(acronyms);
   const indexEntries = Object.entries(index);
   return (
-    <>
       <main className="flex flex-col min-h-screen p-4 prose items-left">
         {indexEntries.map(IndexEntry)}
       </main>
-      <aside>Other relevant terms</aside>
-    </>
   );
 }

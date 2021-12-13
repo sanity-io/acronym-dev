@@ -30,7 +30,7 @@ export default function LikeButton(props: LikeButtonProps) {
         <button
           disabled={transition.state !== "idle"}
           onClick={handleLike}
-          className={` hover:text-red-500 ${effect && "animate-wiggle"}`}
+          className={` hover:text-pink-600 ${effect && "animate-wiggle"}`}
           onAnimationEnd={() => setEffect(false)}
         >
           {" "}

@@ -1,9 +1,8 @@
-import React from "react";
-
 const TermHeader = ({ term }: any) => {
   return (
-    <h1 className="font-bold text-xxl bg-pink-600 text-white inline-block p-1 px-3 italic">
-      {term.toUpperCase()}
+    <h1
+      className="inline-block p-1 px-3 italic font-bold text-white bg-pink-600 text-xxl">
+      {term.toLocaleUpperCase()}
     </h1>
   );
 };
