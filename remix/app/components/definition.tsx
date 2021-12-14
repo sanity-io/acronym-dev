@@ -7,7 +7,7 @@ type DefinitionProps = {
   term: string;
   definition: any;
   hr: boolean;
-  _key: string;
+  _key?: string;
   id: string;
   revisionId: string;
 };
@@ -61,13 +61,13 @@ const Definition = ({
           </dt>
           <dd>
             {definition.description?.length > 0 && (
-              <div className="text-sm">
+              <div className="text-xl">
                 <PortableText blocks={definition.description} />
               </div>
             )}
             {definition.resources?.length > 0 && (
               <>
-                <hr className="my-6"/>
+                <hr className="my-6" />
                 <h4 className="mb-0 text-base font-normal">Resources</h4>
                 <ul className="p-4 pt-0 mt-2 text-base list-disc">
                   {definition.resources.map((resource: any) => (
@@ -83,23 +83,30 @@ const Definition = ({
                 </ul>
               </>
             )}
-            <div className="text-sm">
-            <Link
-                  to={`/${term.toLowerCase()}/${definition?.slug?.current}/${
-                    definition._key
-                  }`}
-                  className="mr-4"
-                >
-                  Permalink
-                </Link>
-                <LikeButton
-                  id={id}
-                  _key={definition._key}
-                  term={term}
-                  revisionId={revisionId}
-                  likes={definition.likes}
-                />
+            <div className="text-sm flex justify-between">
+              <LikeButton
+                id={id}
+                _key={definition._key}
+                term={term}
+                revisionId={revisionId}
+                likes={definition.likes}
+              />
+              <div>
+                {definition.suggestedBy && (
+                  <span className="font-sm font-light text-gray-500">
+                    Suggested by {definition?.suggestedBy?.name}
+                  </span>
+                )}
               </div>
+              <Link
+                to={`/${term.toLowerCase()}/${definition?.slug?.current}/${
+                  definition._key
+                }`}
+                className="mr-4 inline"
+              >
+                Permalink
+              </Link>
+            </div>
           </dd>
         </dl>
       </article>
