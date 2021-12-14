@@ -22,7 +22,7 @@ export default function LikeButton(props: LikeButtonProps) {
 
   return (
     <span>
-      <Form method="post">
+      <Form method="post" className="inline">
         <input hidden name="_key" value={_key} readOnly />
         <input hidden name="term" value={term} readOnly />
         <input hidden name="revisionId" value={revisionId} readOnly />
