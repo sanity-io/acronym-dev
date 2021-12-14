@@ -5,7 +5,7 @@ import TermHeader from "~/components/termHeader";
 import { client } from "~/lib/sanity/client";
 import { likeButtonAction } from "~/lib/likeButtonAction";
 
-export async function action({ request }) {
+export async function action({ request }: any) {
   const data = await request.formData();
   return likeButtonAction(data);
 }
@@ -16,7 +16,10 @@ const query = groq`*[_type == "term" && slug.current == $term][0]{
         slug,
         term,
         description,
-        definitions[slug.current == $definitionSlug],
+        definitions[slug.current == $definitionSlug]{
+          ...,
+          suggestedBy->
+        },
       }`;
 type loaderProps = {
   term: string;
@@ -41,11 +44,10 @@ export default function TermDefinition() {
   return (
     <div>
       <>
-        <Link to={`/${term}`}>Back</Link>
         <section className="p-6 border-1 bg-white border-gray-300 drop-shadow-md max-w-3xl mx-auto prose my-2">
           <TermHeader term={term} />
           {definitions &&
-            definitions.map((definition, index, arr) => (
+            definitions.map((definition: any, index: number, arr: any) => (
               <Definition
                 definition={definition}
                 hr={index < arr.length - 1}
@@ -55,10 +57,6 @@ export default function TermDefinition() {
                 id={_id}
               />
             ))}
-        </section>
-        <section className="p-4">
-          <p className="py-10">Suggest an acronym</p>
-          <aside>Other relevant terms</aside>
         </section>
       </>
     </div>

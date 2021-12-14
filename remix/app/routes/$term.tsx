@@ -1,11 +1,11 @@
-import { Link, MetaFunction, useLoaderData } from "remix";
+import { useLoaderData } from "remix";
 import groq from "groq";
 import { client } from "~/lib/sanity/client";
 import Definition from "../components/definition";
 import TermHeader from "~/components/termHeader";
 import { likeButtonAction } from "~/lib/likeButtonAction";
 
-export async function action({ request: any }) {
+export async function action({ request }: { request: any }) {
   const data = await request.formData();
   return likeButtonAction(data);
 }
@@ -34,7 +34,10 @@ const query = groq`*[_type == "term" && slug.current == $term][0]{
         _id,
         term,
         description,
-        definitions,
+        definitions[]{
+          ...,
+          suggestedBy->
+        },
         slug,
         _rev,
         _updatedAt
