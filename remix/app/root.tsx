@@ -142,7 +142,7 @@ function Layout({ children }: { children: React.ReactNode }) {
           </a>
         </nav>
         <Link to="/" title="Home" className="w-full text-center">
-          <h1 className="font-black text-9xl ">
+          <h1 className="font-black text-6xl md:text-9xl ">
             <span className="text-pink-600 alternateColor">a</span>
             <span className="text-indigo-600 alternateColor">c</span>
             <span className="text-pink-600 alternateColor">r</span>
